@@ -7,9 +7,21 @@ const User = require(__dirname + '/src/models/user');
 const app = express();
 const port = process.env.PORT || 3000;
 
-// app.get("/", function(req,res){
+app.get("/users", function(req,res){
 
-// });
+    User.find(function(err, users){
+        if(err){
+            console.log(err);
+        }else{
+            console.log(users);
+        }
+    }).then((users) => {
+        res.send(users);
+    }).catch((e) =>{
+        res.status(500).send(e);
+    });
+
+});
 
 app.post("/users", function(req, res){
     
